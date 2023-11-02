@@ -3,7 +3,7 @@ package de.telran.g_10_170123_e_be_dto.domain.dto;
 public class UserDTO {
 
     private int id;
-    private String name;
+    private String username;
     private String password;
 
     public UserDTO() {
@@ -17,12 +17,12 @@ public class UserDTO {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {

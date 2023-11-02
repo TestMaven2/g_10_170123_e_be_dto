@@ -2,22 +2,18 @@ package de.telran.g_10_170123_e_be_dto.service;
 
 import de.telran.g_10_170123_e_be_dto.domain.dto.UserDTO;
 import de.telran.g_10_170123_e_be_dto.domain.entity.User;
-import org.springframework.stereotype.Service;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
-@Service
-public class UserMappingService {
+@Mapper(componentModel = "spring")
+public interface UserMappingService {
 
-    public UserDTO mapToDto(User user) {
-        UserDTO dto = new UserDTO();
-        dto.setId(user.getId());
-        dto.setName(user.getName());
-        return dto;
-    }
+    @Mapping(source = "user.name", target = "username")
+    @Mapping(target = "password", constant = "password is hidden")
+    UserDTO mapToDto(User user);
 
-    public User mapToEntity(UserDTO dto) {
-        User entity = new User();
-        entity.setName(dto.getName());
-        entity.setPassword(String.valueOf(dto.getPassword().hashCode()));
-        return entity;
-    }
+    @Mapping(source = "user.username", target = "name")
+    @Mapping(target = "id", constant = "0")
+    @Mapping(target = "password", expression = "java(String.valueOf(user.getPassword().hashCode()))")
+    User mapToEntity(UserDTO user);
 }
