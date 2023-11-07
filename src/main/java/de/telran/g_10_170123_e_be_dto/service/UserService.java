@@ -2,6 +2,7 @@ package de.telran.g_10_170123_e_be_dto.service;
 
 import de.telran.g_10_170123_e_be_dto.domain.dto.UserDTO;
 import de.telran.g_10_170123_e_be_dto.domain.entity.User;
+import de.telran.g_10_170123_e_be_dto.domain.entity.UserDetails;
 import de.telran.g_10_170123_e_be_dto.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,8 +28,16 @@ public class UserService {
     }
 
     public UserDTO add(UserDTO user) {
-        User savedUser = repository.save(mappingService.mapToEntity(user));
-        return mappingService.mapToDto(savedUser);
+        User newUser = mappingService.mapToEntity(user);
+        UserDetails details = new UserDetails();
+        details.setAddress("Test address");
+        details.setEmail("test@test.de");
+        details.setPhone("+3333333333333");
+        details.setUser(newUser);
+        newUser.setUserDetails(details);
+
+        newUser = repository.save(newUser);
+        return mappingService.mapToDto(newUser);
     }
 
     public void delete(int id) {

@@ -10,6 +10,7 @@ public interface UserMappingService {
 
     @Mapping(source = "user.name", target = "username")
     @Mapping(target = "password", constant = "password is hidden")
+    @Mapping(source = "user.userDetails", target = "userDetails")
     UserDTO mapToDto(User user);
 
     @Mapping(source = "user.username", target = "name")
