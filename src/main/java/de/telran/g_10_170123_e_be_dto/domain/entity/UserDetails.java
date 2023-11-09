@@ -1,6 +1,7 @@
 package de.telran.g_10_170123_e_be_dto.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 
 @Entity
@@ -11,15 +12,19 @@ public class UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     @JsonIgnore
+    @Schema(description = "Идентификатор записи об информации о пользователе", example = "555")
     private int id;
 
     @Column(name = "address")
+    @Schema(description = "Адрес пользователя", example = "Ул. Пушкина, д. 3.")
     private String address;
 
     @Column(name = "phone")
+    @Schema(description = "Номер телефона пользователя", example = "+1112223344")
     private String phone;
 
     @Column(name = "email")
+    @Schema(description = "Электронная почта пользователя", example = "test@example.com")
     private String email;
 
     @JsonIgnore
